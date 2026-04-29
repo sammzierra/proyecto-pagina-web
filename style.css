@@ -1,0 +1,70 @@
+:root {
+    --primary: #3b82f6;
+    --bg: #0b0f1a;
+    --surface: #161b2a;
+    --text: #f8fafc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    background: var(--bg); color: var(--text); 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+header { 
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5%; background: rgba(11,15,26,0.8); backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1e293b;
+}
+
+.logo span { color: var(--primary); font-weight: 800; }
+.badge { background: var(--primary); padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; margin-left: 5px; }
+
+.hero { text-align: center; padding: 60px 20px; }
+.text-gradient { background: linear-gradient(90deg, #3b82f6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; padding: 20px 5%; }
+.product-card { background: var(--surface); border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+.product-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; }
+
+/* Pasarela de Pago */
+.checkout-overlay { position: fixed; inset: 0; background: rgba(2,6,23,0.95); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+.checkout-container { background: var(--surface); width: 95%; max-width: 1000px; height: 90vh; display: grid; grid-template-columns: 1fr 350px; border-radius: 30px; overflow: hidden; }
+.checkout-form-side { padding: 40px; overflow-y: auto; }
+.checkout-summary-side { background: #0f172a; padding: 40px; border-left: 1px solid #1e293b; }
+
+/* Estilos de Logos de Pago */
+.payment-methods { display: flex; gap: 10px; margin-bottom: 25px; }
+.method-option { flex: 1; }
+.method-option input { display: none; }
+.method-box { 
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 12px; background: #1e293b; border-radius: 12px; border: 2px solid transparent; 
+    transition: 0.3s; cursor: pointer; height: 55px;
+}
+.method-option input:checked + .method-box { border-color: var(--primary); background: rgba(59,130,246,0.1); }
+.brand-logo { height: 22px; width: auto; max-width: 70px; filter: brightness(1.1); }
+
+/* Tarjeta */
+.card-visual {
+    width: 100%; max-width: 380px; height: 210px; background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border-radius: 20px; padding: 25px; margin: 0 auto 25px;
+    font-family: 'Share Tech Mono', monospace; display: flex; flex-direction: column; justify-content: space-between;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.card-chip { width: 45px; height: 35px; background: #ffd700; border-radius: 6px; }
+.card-num-display { font-size: 1.4rem; letter-spacing: 2px; }
+
+/* Inputs y Botones */
+input { width: 100%; padding: 14px; margin-bottom: 15px; background: #1e293b; border: 1px solid #334155; border-radius: 12px; color: white; outline: none; }
+.form-row { display: flex; gap: 10px; }
+.btn-pay-final { background: var(--primary); color: white; width: 100%; padding: 18px; border: none; border-radius: 15px; font-weight: 800; cursor: pointer; font-size: 1rem; }
+.btn-back { background: none; border: none; color: #94a3b8; cursor: pointer; margin-bottom: 20px; }
+
+/* Sidebar */
+.cart-sidebar { position: fixed; right: -400px; top: 0; width: 380px; height: 100%; background: #0f172a; z-index: 2000; transition: 0.4s; padding: 25px; display: flex; flex-direction: column; }
+.cart-sidebar.active { right: 0; }
+.cart-item { display: flex; gap: 15px; margin-bottom: 15px; align-items: center; }
+.cart-item img { width: 50px; height: 50px; border-radius: 10px; }
