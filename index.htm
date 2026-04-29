@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore | Checkout Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo">Virtual<span>Store</span></div>
+    <div class="cart-nav" onclick="toggleCart()">
+        <span class="icon">🛒</span>
+        <span id="cart-count" class="badge">0</span>
+    </div>
+</header>
+
+<main id="shop-view">
+    <section class="hero">
+        <h1>Tu Próximo <span class="text-gradient">Nivel</span></h1>
+        <p>Hardware de élite para usuarios exigentes.</p>
+    </section>
+    <div class="container products-grid" id="product-list"></div>
+</main>
+
+<!-- PASARELA DE PAGO -->
+<section id="checkout-view" class="checkout-overlay" style="display: none;">
+    <div class="checkout-container">
+        <div class="checkout-form-side">
+            <button class="btn-back" onclick="hideCheckout()">← Volver</button>
+            <h2>Finalizar Pedido</h2>
+
+            <!-- Métodos con Logos Originales -->
+            <div class="payment-methods">
+                <label class="method-option">
+                    <input type="radio" name="pay-method" value="card" checked onclick="switchMethod('card')">
+                    <div class="method-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="brand-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="brand-logo">
+                    </div>
+                </label>
+                <label class="method-option">
+                    <input type="radio" name="pay-method" value="paypal" onclick="switchMethod('paypal')">
+                    <div class="method-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="brand-logo">
+                    </div>
+                </label>
+                <label class="method-option">
+                    <input type="radio" name="pay-method" value="nequi" onclick="switchMethod('nequi')">
+                    <div class="method-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Logo_Nequi.svg" alt="Nequi" class="brand-logo">
+                    </div>
+                </label>
+                <label class="method-option">
+                    <input type="radio" name="pay-method" value="transfiya" onclick="switchMethod('transfiya')">
+                    <div class="method-box">
+                        <img src="https://i.ibb.co/6R0nL1j/transfiya-logo.png" alt="Transfiya" class="brand-logo">
+                    </div>
+                </label>
+            </div>
+
+            <div id="card-wrapper" class="card-visual">
+                <div class="card-top">
+                    <div class="card-chip"></div>
+                    <div id="card-logo-v" class="card-brand">VISA</div>
+                </div>
+                <div class="card-num-display" id="v-number">#### #### #### ####</div>
+                <div class="card-info-row">
+                    <div class="info-group">
+                        <span>Titular</span>
+                        <div id="v-name">NOMBRE APELLIDO</div>
+                    </div>
+                    <div class="info-group">
+                        <span>Expira</span>
+                        <div id="v-expiry">MM/YY</div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="payment-form" onsubmit="event.preventDefault(); alert('Procesando pago...');">
+                <div id="card-inputs">
+                    <input type="text" id="in-name" placeholder="Nombre completo" onkeyup="syncCard()">
+                    <input type="text" id="in-number" placeholder="Número de tarjeta" maxlength="19" onkeyup="syncCard()">
+                    <div class="form-row">
+                        <input type="text" id="in-expiry" placeholder="MM/YY" maxlength="5" onkeyup="syncCard()">
+                        <input type="text" id="in-cvc" placeholder="CVC" maxlength="3">
+                    </div>
+                </div>
+                
+                <div id="alt-methods-msg" style="display:none;" class="alt-msg-container"></div>
+
+                <button type="submit" class="btn-pay-final">Confirmar Pago <span id="final-price">$0</span></button>
+            </form>
+        </div>
+
+        <div class="checkout-summary-side">
+            <h3>Resumen</h3>
+            <div id="order-summary"></div>
+            <div class="summary-total">
+                <span>Total a pagar:</span>
+                <strong id="summary-total-val">$0</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CARRITO SIDEBAR -->
+<div id="cart-panel" class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Tu Carrito</h3>
+        <button onclick="toggleCart()">&times;</button>
+    </div>
+    <div id="cart-items" class="cart-body"></div>
+    <div class="cart-footer">
+        <div class="total-row"><span>Total</span><strong id="cart-total">$0</strong></div>
+        <button class="btn-go-checkout" onclick="showCheckout()">Pagar ahora</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
